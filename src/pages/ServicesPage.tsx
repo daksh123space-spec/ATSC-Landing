@@ -125,34 +125,66 @@ const ServicesPage: React.FC = () => {
                 style={{ scaleX }}
             />
 
-            {/* Clean Hero Section */}
-            <section className="relative h-[70vh] flex items-center justify-center overflow-hidden border-b border-white/5">
+            {/* Epic Video Hero Section */}
+            <section className="relative h-[85vh] flex items-center justify-center overflow-hidden border-b border-white/5">
                 <div className="absolute inset-0 z-0">
-                    <img
-                        src="/service-hero-bg.png"
-                        alt="ATSC Infrastructure"
-                        className="w-full h-full object-cover opacity-40 brightness-[0.7] scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-transparent to-charcoal"></div>
+                    <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="w-full h-full object-cover opacity-60 scale-105"
+                    >
+                        <source src="/services-hero-video.mp4" type="video/mp4" />
+                    </video>
+                    {/* Multi-layered overlays for depth */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-transparent to-charcoal"></div>
+                    <div className="absolute inset-0 bg-charcoal/20"></div>
                 </div>
 
-                <div className="relative z-10 text-center px-6">
+                <div className="relative z-10 text-center px-6 mt-20">
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
                     >
-                        <span className="text-accent-gold text-[10px] tracking-[1em] uppercase mb-8 block font-black opacity-80">Corporate Capabilities</span>
-                        <h1 className="font-serif text-[clamp(4rem,10vw,8rem)] leading-none tracking-tighter mb-10 drop-shadow-2xl">
-                            The Vertical <br />
-                            <span className="italic font-light text-white/40">Advantage</span>
+                        <motion.span
+                            initial={{ letterSpacing: "0.2em", opacity: 0 }}
+                            animate={{ letterSpacing: "0.8em", opacity: 0.8 }}
+                            transition={{ duration: 2, delay: 0.5 }}
+                            className="text-accent-gold text-[11px] uppercase mb-10 block font-black"
+                        >
+                            Industrial Excellence
+                        </motion.span>
+
+                        <h1 className="font-serif text-[clamp(4.5rem,14vw,11rem)] leading-[0.85] tracking-tighter mb-12 drop-shadow-2xl">
+                            Corporate <br />
+                            <span className="italic font-light text-white/40">Capabilities</span>
                         </h1>
-                        <div className="w-24 h-[1px] bg-accent-gold/40 mx-auto mb-10"></div>
-                        <p className="max-w-2xl mx-auto text-xl text-white font-light leading-relaxed drop-shadow-lg">
-                            A comprehensive overview of Arbaminch Textile SC's industrial infrastructure, production capacities, and service spectrum.
+
+                        <div className="flex items-center justify-center gap-6 mb-12">
+                            <div className="w-16 h-[1px] bg-accent-gold/30"></div>
+                            <div className="w-2 h-2 rounded-full bg-accent-gold/40"></div>
+                            <div className="w-16 h-[1px] bg-accent-gold/30"></div>
+                        </div>
+
+                        <p className="max-w-3xl mx-auto text-xl md:text-2xl text-white font-light leading-relaxed drop-shadow-xl opacity-90">
+                            A high-fidelity perspective on our vertical infrastructure, <br className="hidden md:block" />
+                            precision production capacities, and technical service spectrum.
                         </p>
                     </motion.div>
                 </div>
+
+                {/* Decorative Scroll Hint */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2, duration: 1 }}
+                    className="absolute bottom-12 left-12 flex items-center gap-4"
+                >
+                    <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/30 rotate-180 [writing-mode:vertical-lr]">Scroll</div>
+                    <div className="w-px h-24 bg-gradient-to-b from-accent-gold/50 to-transparent"></div>
+                </motion.div>
             </section>
 
             {/* Main Content */}
