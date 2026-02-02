@@ -4,51 +4,52 @@ import { motion, useScroll, useSpring } from 'framer-motion';
 const ServiceSection = ({ title, content, stats, images, index, detailSections }: any) => {
     const isEven = index % 2 === 0;
 
-    return (
-        <section className={`py-40 px-6 border-b border-white/5 ${index % 2 === 1 ? 'bg-white/[0.01]' : ''}`}>
-            <div className="max-w-7xl mx-auto">
-                {/* Main Heading & Intro */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start mb-24">
-                    <div className="space-y-12">
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                        >
-                            <span className="text-accent-gold text-xs tracking-[0.5em] uppercase font-bold mb-8 block">Section 0{index + 1}</span>
-                            <h2 className="font-serif text-6xl md:text-8xl text-white mb-10 tracking-tighter leading-none">{title}</h2>
-                            <div className="space-y-8">
-                                {content.map((p: string, i: number) => (
-                                    <p key={i} className="text-xl text-white/60 font-light leading-relaxed">
-                                        {p}
-                                    </p>
+    // CASE A: Detailed Section (Dyeing & Printing)
+    if (detailSections) {
+        return (
+            <section className={`py-40 px-6 border-b border-white/5 ${index % 2 === 1 ? 'bg-white/[0.01]' : ''}`}>
+                <div className="max-w-7xl mx-auto">
+                    {/* Main Heading & Intro */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start mb-24">
+                        <div className="space-y-12">
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                            >
+                                <span className="text-accent-gold text-xs tracking-[0.5em] uppercase font-bold mb-8 block">Section 0{index + 1}</span>
+                                <h2 className="font-serif text-6xl md:text-8xl text-white mb-10 tracking-tighter leading-none">{title}</h2>
+                                <div className="space-y-8">
+                                    {content.map((p: string, i: number) => (
+                                        <p key={i} className="text-xl text-white/60 font-light leading-relaxed">
+                                            {p}
+                                        </p>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        </div>
+
+                        <div className="lg:sticky lg:top-40">
+                            <div className="grid grid-cols-2 gap-6">
+                                {stats.map((stat: any, i: number) => (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.8, delay: i * 0.1 }}
+                                        className="p-8 rounded-[2rem] bg-white/[0.03] border border-white/10 backdrop-blur-xl shadow-xl"
+                                    >
+                                        <div className="text-accent-gold text-3xl font-bold mb-2 tracking-tighter">{stat.value}</div>
+                                        <div className="text-white/40 text-[10px] tracking-[0.2em] uppercase font-black">{stat.label}</div>
+                                    </motion.div>
                                 ))}
                             </div>
-                        </motion.div>
-                    </div>
-
-                    <div className="lg:sticky lg:top-40">
-                        <div className="grid grid-cols-2 gap-6">
-                            {stats.map((stat: any, i: number) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.8, delay: i * 0.1 }}
-                                    className="p-8 rounded-[2rem] bg-white/[0.03] border border-white/10 backdrop-blur-xl shadow-xl"
-                                >
-                                    <div className="text-accent-gold text-3xl font-bold mb-2 tracking-tighter">{stat.value}</div>
-                                    <div className="text-white/40 text-[10px] tracking-[0.2em] uppercase font-black">{stat.label}</div>
-                                </motion.div>
-                            ))}
                         </div>
                     </div>
-                </div>
 
-                {/* Categorized Details & Images - Restored and Improved */}
-                {detailSections ? (
+                    {/* Categorized Details & Images - Vertical Layout */}
                     <div className="space-y-32">
                         {detailSections.map((detail: any, i: number) => (
                             <motion.div
@@ -83,42 +84,104 @@ const ServiceSection = ({ title, content, stats, images, index, detailSections }
                             </motion.div>
                         ))}
                     </div>
-                ) : (
-                    /* Fallback for Spinning & Weaving with image grids */
-                    images && images.length > 0 && (
-                        <div className="grid grid-cols-12 gap-8 h-auto">
-                            {images.length === 1 ? (
+                </div>
+            </section>
+        );
+    }
+
+    // CASE B: Standard Layout (Spinning & Weaving)
+    return (
+        <section className={`py-40 px-6 border-b border-white/5 ${index % 2 === 1 ? 'bg-white/[0.01]' : ''}`}>
+            <div className="max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+
+                    {/* Text Content */}
+                    <div className={`space-y-12 ${!isEven ? 'lg:order-2' : ''}`}>
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            <span className="text-accent-gold text-xs tracking-[0.5em] uppercase font-bold mb-8 block">Section 0{index + 1}</span>
+                            <h2 className="font-serif text-6xl md:text-8xl text-white mb-10 tracking-tighter leading-none">{title}</h2>
+                            <div className="space-y-6">
+                                {content.map((p: string, i: number) => (
+                                    <p key={i} className="text-xl text-white/60 font-light leading-relaxed">
+                                        {p}
+                                    </p>
+                                ))}
+                            </div>
+                        </motion.div>
+
+                        {/* Interactive Highlight */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, delay: 0.4 }}
+                            className="p-8 rounded-[2.5rem] bg-gradient-to-br from-accent-gold/10 to-transparent border border-accent-gold/20"
+                        >
+                            <p className="text-accent-gold text-sm font-medium italic opacity-80">
+                                Driving industrial excellence through vertical integration and advanced technology.
+                            </p>
+                        </motion.div>
+                    </div>
+
+                    {/* Visuals & Stats */}
+                    <div className={`space-y-12 ${!isEven ? 'lg:order-1' : ''}`}>
+                        {/* Image Grid */}
+                        {images && images.length > 0 && (
+                            <div className="grid grid-cols-12 gap-4 h-[500px]">
+                                {images.length === 1 ? (
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        viewport={{ once: true }}
+                                        className="col-span-12 h-full rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl"
+                                    >
+                                        <img src={images[0]} className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105" alt={title} />
+                                    </motion.div>
+                                ) : (
+                                    <>
+                                        <motion.div
+                                            initial={{ opacity: 0, x: -20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            className="col-span-7 h-full rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl"
+                                        >
+                                            <img src={images[0]} className="w-full h-full object-cover" alt={title} />
+                                        </motion.div>
+                                        <motion.div
+                                            initial={{ opacity: 0, x: 20, y: 40 }}
+                                            whileInView={{ opacity: 1, x: 0, y: 40 }}
+                                            viewport={{ once: true }}
+                                            className="col-span-5 h-[80%] rounded-[2rem] overflow-hidden border border-white/10 shadow-3xl translate-y-20"
+                                        >
+                                            <img src={images[1]} className="w-full h-full object-cover" alt={title} />
+                                        </motion.div>
+                                    </>
+                                )}
+                            </div>
+                        )}
+
+                        <div className="grid grid-cols-2 gap-6 pt-12">
+                            {stats.map((stat: any, i: number) => (
                                 <motion.div
-                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    key={i}
+                                    initial={{ opacity: 0, scale: 0.9 }}
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true }}
-                                    className="col-span-12 h-[500px] rounded-[4rem] overflow-hidden border border-white/10 shadow-3xl"
+                                    transition={{ duration: 0.8, delay: i * 0.1 }}
+                                    className="p-8 rounded-[2rem] bg-white/[0.03] border border-white/10 backdrop-blur-xl group hover:bg-white/[0.06] transition-all duration-500 shadow-xl"
                                 >
-                                    <img src={images[0]} className="w-full h-full object-cover" alt={title} />
+                                    <div className="text-accent-gold text-3xl font-bold mb-2 tracking-tighter drop-shadow-sm">{stat.value}</div>
+                                    <div className="text-white/40 text-[10px] tracking-[0.2em] uppercase font-black">{stat.label}</div>
                                 </motion.div>
-                            ) : (
-                                <>
-                                    <motion.div
-                                        initial={{ opacity: 0, x: -30 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true }}
-                                        className="col-span-12 lg:col-span-7 h-[500px] rounded-[4rem] overflow-hidden border border-white/10 shadow-3xl"
-                                    >
-                                        <img src={images[0]} className="w-full h-full object-cover" alt={title} />
-                                    </motion.div>
-                                    <motion.div
-                                        initial={{ opacity: 0, x: 30, y: 50 }}
-                                        whileInView={{ opacity: 1, x: 0, y: 50 }}
-                                        viewport={{ once: true }}
-                                        className="col-span-12 lg:col-span-5 h-[400px] rounded-[4rem] overflow-hidden border border-white/10 shadow-3xl lg:translate-y-20"
-                                    >
-                                        <img src={images[1]} className="w-full h-full object-cover" alt={title} />
-                                    </motion.div>
-                                </>
-                            )}
+                            ))}
                         </div>
-                    )
-                )}
+                    </div>
+                </div>
             </div>
         </section>
     );
@@ -173,27 +236,27 @@ const ServicesPage: React.FC = () => {
             detailSections: [
                 {
                     name: "Chiffon",
-                    image: "/dyeing-printing-1.png",
+                    image: "/dyeing-printing-cat-1.png",
                     description: "A sheer, semi-transparent fabric with a simple weave, known for being extremely light and elegant. Composition: Silk, Cotton, Nylon, Polyester.",
                     composition: "Silk, Cotton, Nylon, Polyester"
                 },
                 {
+                    name: "Satin & Floral Prints",
+                    image: "/dyeing-printing-cat-2.png",
+                    description: "Our high-density satin weave provides a lustrous surface for vibrant floral and decorative patterns, perfect for premium fashion and home textile applications.",
+                    composition: "Silk, Cotton, Polyester"
+                },
+                {
                     name: "Wool Peach",
-                    image: "/dyeing-printing-3.png",
-                    description: "A mixture fabric that is lighter and thinner than jersey, providing a smooth, high-quality finish for fashion garments.",
+                    image: "/dyeing-printing-cat-3.png",
+                    description: "A specialized mixture fabric lighter than jersey, providing a smooth finish and excellent drape for sophisticated garments.",
                     composition: "Silk, Cotton, Nylon"
                 },
                 {
-                    name: "Twill & Knit Prints",
-                    image: "/dyeing-printing-military.png",
-                    description: "Combining synthetic strength with cotton softness. Widely used for high-durability requirements like tactical and military gear.",
+                    name: "Military & Twill Prints",
+                    image: "/dyeing-printing-cat-4.png",
+                    description: "High-durability twill and knit constructions designed for the National forces, featuring precision camouflage and technical finishing.",
                     composition: "Polyester, Cotton"
-                },
-                {
-                    name: "Suiting Fabric",
-                    image: "/dyeing-printing-fabric.png",
-                    description: "High-quality woven material used for tailored clothing and premium corporate apparel.",
-                    composition: "Polyester, Viscose"
                 }
             ],
             stats: [
