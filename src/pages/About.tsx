@@ -292,9 +292,9 @@ const About: React.FC = () => {
                     <img
                         src="/values-nature-new.jpg"
                         alt="Core DNA"
-                        className="w-full h-full object-cover scale-105"
+                        className="w-full h-full object-cover scale-110 blur-3xl opacity-30"
                     />
-                    <div className="absolute inset-0 bg-black/40"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-transparent to-charcoal"></div>
                 </div>
 
                 <div className="relative z-10">
@@ -333,54 +333,7 @@ const About: React.FC = () => {
                         ))}
                     </div>
 
-                    {/* Sustainability / CSR Section */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.2, delay: 0.2 }}
-                        viewport={{ once: true }}
-                        className="mt-32 max-w-6xl mx-auto overflow-hidden rounded-[4rem] relative group border border-white/10 shadow-3xl"
-                    >
-                        <div className="aspect-[21/9] w-full relative overflow-hidden">
-                            <img
-                                src="/corporate-social.jpg"
-                                alt="Sustainable Future"
-                                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                            <div className="absolute bottom-12 left-12 right-12 text-left">
-                                <span className="text-accent-gold text-xs tracking-[0.6em] uppercase mb-4 block font-bold">Sustainability</span>
-                                <h3 className="font-serif text-4xl md:text-5xl text-white mb-4 tracking-tight">Rooted in the <span className="italic font-light text-accent-gold">Future</span></h3>
-                                <p className="text-white/60 max-w-xl text-lg font-light leading-relaxed">
-                                    We believe that industrial growth and environmental stewardship go hand in hand. Our commitment to reforestation and community involvement is a cornerstone of our corporate DNA.
-                                </p>
-                            </div>
-                        </div>
-                    </motion.div>
                 </div>
-
-                {/* Sustainability / CSR Section */}
-                <motion.div
-                    initial={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="mt-20 max-w-6xl mx-auto overflow-hidden rounded-[4rem] relative group border border-white/20 shadow-4xl"
-                >
-                    <div className="aspect-[16/9] md:aspect-[21/9] w-full relative overflow-hidden">
-                        <img
-                            src="/corporate-social.jpg"
-                            alt="Sustainable Future"
-                            className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                        <div className="absolute bottom-12 left-12 right-12 text-left">
-                            <span className="text-accent-gold text-xs tracking-[0.6em] uppercase mb-4 block font-bold">Sustainability</span>
-                            <h3 className="font-serif text-4xl md:text-5xl text-white mb-4 tracking-tight drop-shadow-xl">Rooted in the <span className="italic font-light text-accent-gold">Future</span></h3>
-                            <p className="text-white/80 max-w-xl text-lg font-light leading-relaxed drop-shadow-lg">
-                                We believe that industrial growth and environmental stewardship go hand in hand. Our commitment to reforestation and community involvement is a cornerstone of our corporate DNA.
-                            </p>
-                        </div>
-                    </div>
-                </motion.div>
             </section>
         </div>
     );
