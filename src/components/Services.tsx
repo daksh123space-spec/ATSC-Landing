@@ -36,7 +36,7 @@ const Services: React.FC = () => {
                 <div className="max-w-[1600px] mx-auto w-full px-4 md:px-8 relative h-full flex flex-col justify-center items-center">
 
                     {/* Heading - two lines with different styles */}
-                    <div className="text-center relative z-0 px-8">
+                    <div className="text-center relative z-0 px-8 mb-20">
                         <h2 className="font-serif font-black text-white text-3xl md:text-5xl lg:text-6xl mb-4 leading-tight tracking-tight uppercase">
                             Explore our wide variety of
                         </h2>
@@ -47,24 +47,27 @@ const Services: React.FC = () => {
                                 color: '#D4AF37',
                                 textShadow: useTransform(scrollYProgress, [0, 0.15], ["0px 0px 0px rgba(212,175,55,0)", "0px 0px 15px rgba(212,175,55,0.4)"])
                             }}
-                            className="font-serif italic text-4xl md:text-6xl lg:text-7xl mb-4 leading-tight"
+                            className="font-serif italic text-4xl md:text-6xl lg:text-7xl mb-4 leading-tight relative overflow-hidden group"
                         >
-                            Textile Services
+                            <span className="relative z-10">Textile Services</span>
+                            {/* Shining Effect */}
+                            <motion.div
+                                animate={{
+                                    left: ["-100%", "200%"]
+                                }}
+                                transition={{
+                                    duration: 3,
+                                    repeat: Infinity,
+                                    ease: "linear"
+                                }}
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 opacity-50 z-20"
+                            />
                         </motion.h2>
                         {/* Decorative line below */}
-                        <div className="w-32 h-0.5 bg-white mx-auto mb-8 opacity-30"></div>
-                        <p className="text-gray-400 leading-relaxed font-light text-lg md:text-xl max-w-3xl mx-auto mb-10">
+                        <div className="w-32 h-0.5 bg-white mx-auto opacity-30"></div>
+                        <p className="text-gray-400 leading-relaxed font-light text-lg md:text-xl max-w-3xl mx-auto mt-8">
                             Explore our diverse range of textiles catering to fashion, home furnishings, and industrial needs.
                         </p>
-                        <div className="mt-12 md:mt-16 relative z-30">
-                            <Link
-                                to="/services"
-                                className="inline-flex items-center gap-3 px-12 py-5 bg-white text-charcoal rounded-full font-bold uppercase tracking-[0.2em] hover:bg-accent-gold hover:text-white hover:scale-105 transition-all duration-300 shadow-2xl flex-nowrap whitespace-nowrap group"
-                            >
-                                <span>Explore Services</span>
-                                <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                            </Link>
-                        </div>
                     </div>
 
                     {/* Cards container - perfectly centered, overlapping text */}
@@ -191,6 +194,16 @@ const Services: React.FC = () => {
                                 );
                             })}
                         </div>
+                    </div>
+                    {/* Button - Repositioned at bottom of sticky container to avoid overlap */}
+                    <div className="absolute bottom-16 z-50">
+                        <Link
+                            to="/services"
+                            className="inline-flex items-center gap-3 px-12 py-5 bg-white text-charcoal rounded-full font-bold uppercase tracking-[0.2em] hover:bg-accent-gold hover:text-white hover:scale-105 transition-all duration-300 shadow-2xl flex-nowrap whitespace-nowrap group"
+                        >
+                            <span>Explore Services</span>
+                            <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </Link>
                     </div>
                 </div>
             </div>

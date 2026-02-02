@@ -18,8 +18,8 @@ const Contact: React.FC = () => {
 
     return (
         <div className="bg-charcoal min-h-screen text-white">
-            {/* Dark Hero Section */}
-            <section className="relative h-[60vh] flex flex-col items-center justify-center overflow-hidden">
+            {/* Full-Screen Dark Hero Section */}
+            <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
                         src="/contact-hero.jpg"

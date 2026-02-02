@@ -13,26 +13,16 @@ const Waitlist: React.FC = () => {
                 <p className="text-xl text-gray-400 font-light mb-12 max-w-xl mx-auto">
                     Have a question or looking to collaborate? Reach out to our team.
                 </p>
-                <form className="max-w-md mx-auto flex flex-col gap-6">
-                    <input
-                        className="w-full bg-transparent border-b border-white/30 py-4 px-2 text-white placeholder-white/40 focus:outline-none focus:border-white transition-colors text-center text-lg"
-                        placeholder="Full Name"
-                        type="text"
-                    />
-                    <input
-                        className="w-full bg-transparent border-b border-white/30 py-4 px-2 text-white placeholder-white/40 focus:outline-none focus:border-white transition-colors text-center text-lg"
-                        placeholder="Email Address"
-                        type="email"
-                    />
+                <div className="max-w-md mx-auto flex flex-col items-center">
                     <Link to="/contact" className="w-full">
                         <button
-                            className="mt-8 bg-white text-charcoal px-12 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors w-full"
+                            className="bg-white text-charcoal px-16 py-5 rounded-full font-bold uppercase tracking-widest hover:bg-accent-gold hover:text-white transition-all duration-300 w-full shadow-2xl"
                             type="button"
                         >
                             Contact
                         </button>
                     </Link>
-                </form>
+                </div>
             </div>
         </section>
     );
