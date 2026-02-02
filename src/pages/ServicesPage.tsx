@@ -1,14 +1,16 @@
 import React from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 
-const ServiceSection = ({ title, content, stats, index }: any) => {
+const ServiceSection = ({ title, content, stats, images, index }: any) => {
+    const isEven = index % 2 === 0;
+
     return (
         <section className={`py-40 px-6 border-b border-white/5 ${index % 2 === 1 ? 'bg-white/[0.01]' : ''}`}>
             <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 
                     {/* Text Content */}
-                    <div className="space-y-12">
+                    <div className={`space-y-12 ${!isEven ? 'lg:order-2' : ''}`}>
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -25,25 +27,6 @@ const ServiceSection = ({ title, content, stats, index }: any) => {
                                 ))}
                             </div>
                         </motion.div>
-                    </div>
-
-                    {/* Stats & Infrastructure */}
-                    <div className="lg:sticky lg:top-40">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {stats.map((stat: any, i: number) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.8, delay: i * 0.1 }}
-                                    className="p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-xl group hover:bg-white/[0.06] transition-all duration-500 shadow-xl"
-                                >
-                                    <div className="text-accent-gold text-4xl font-bold mb-3 tracking-tighter drop-shadow-sm">{stat.value}</div>
-                                    <div className="text-white/40 text-[10px] tracking-[0.2em] uppercase font-black">{stat.label}</div>
-                                </motion.div>
-                            ))}
-                        </div>
 
                         {/* Interactive Highlight */}
                         <motion.div
@@ -51,12 +34,66 @@ const ServiceSection = ({ title, content, stats, index }: any) => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1, delay: 0.4 }}
-                            className="mt-8 p-8 rounded-[2.5rem] bg-gradient-to-br from-accent-gold/10 to-transparent border border-accent-gold/20"
+                            className="p-8 rounded-[2.5rem] bg-gradient-to-br from-accent-gold/10 to-transparent border border-accent-gold/20"
                         >
                             <p className="text-accent-gold text-sm font-medium italic opacity-80">
                                 Driving industrial excellence through vertical integration and advanced technology.
                             </p>
                         </motion.div>
+                    </div>
+
+                    {/* Visuals & Stats */}
+                    <div className={`space-y-12 ${!isEven ? 'lg:order-1' : ''}`}>
+                        {/* Image Grid */}
+                        {images && images.length > 0 && (
+                            <div className="grid grid-cols-12 gap-4 h-[500px]">
+                                {images.length === 1 ? (
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        viewport={{ once: true }}
+                                        className="col-span-12 h-full rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl"
+                                    >
+                                        <img src={images[0]} className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105" alt={title} />
+                                    </motion.div>
+                                ) : (
+                                    <>
+                                        <motion.div
+                                            initial={{ opacity: 0, x: -20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            className="col-span-7 h-full rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl"
+                                        >
+                                            <img src={images[0]} className="w-full h-full object-cover" alt={title} />
+                                        </motion.div>
+                                        <motion.div
+                                            initial={{ opacity: 0, x: 20, y: 40 }}
+                                            whileInView={{ opacity: 1, x: 0, y: 40 }}
+                                            viewport={{ once: true }}
+                                            className="col-span-5 h-[80%] rounded-[2rem] overflow-hidden border border-white/10 shadow-3xl translate-y-20"
+                                        >
+                                            <img src={images[1]} className="w-full h-full object-cover" alt={title} />
+                                        </motion.div>
+                                    </>
+                                )}
+                            </div>
+                        )}
+
+                        <div className="grid grid-cols-2 gap-6 pt-12">
+                            {stats.map((stat: any, i: number) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.8, delay: i * 0.1 }}
+                                    className="p-8 rounded-[2rem] bg-white/[0.03] border border-white/10 backdrop-blur-xl group hover:bg-white/[0.06] transition-all duration-500 shadow-xl"
+                                >
+                                    <div className="text-accent-gold text-3xl font-bold mb-2 tracking-tighter drop-shadow-sm">{stat.value}</div>
+                                    <div className="text-white/40 text-[10px] tracking-[0.2em] uppercase font-black">{stat.label}</div>
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -75,6 +112,7 @@ const ServicesPage: React.FC = () => {
     const services = [
         {
             title: "Yarn Spinning",
+            images: ["/yarn-spinning-1.png", "/yarn-spinning-2.png"],
             content: [
                 "The spinning department consists of a total of 15,000 spindles of ring spinning frames for fine counts spinning and 1,728 rotors of the modern open-end spinning machines for low & medium counts spinning with high productivity.",
                 "The plant is capable of producing different types of cotton, polyester staple fibre, cotton fibre & their blends yarns. Yarn produced in the Arbaminch plant is mainly used for weaving and sold for the local market.",
@@ -89,6 +127,7 @@ const ServicesPage: React.FC = () => {
         },
         {
             title: "Fabric Weaving",
+            images: ["/fabric-weaving-1.png"],
             content: [
                 "The weaving department at our Arbaminch factory has 232 rapier looms equipped with microprocessors that can produce about 31,200 linear meters of grey fabrics per day at 3,336 picks per meter weft density and at 85% loom efficiency.",
                 "Our weaving capacity has been doubled by installing an additional 100 water jet looms at our expansion project in Sebeta town, bringing the total output of grey fabrics to 62,000 linear meters per day.",
@@ -196,6 +235,8 @@ const ServicesPage: React.FC = () => {
 
             {/* Professional Footer CTA */}
             <section className="py-60 px-6 bg-black text-center relative overflow-hidden">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent-gold/5 blur-[150px] rounded-full"></div>
+
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
