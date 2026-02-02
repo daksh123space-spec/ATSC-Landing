@@ -287,50 +287,100 @@ const About: React.FC = () => {
             </section>
 
             {/* Core Values: Elegant Styled Glassmorphism */}
-            <section ref={valuesRef} className="py-40 px-6 max-w-7xl mx-auto text-center relative overflow-hidden rounded-[4rem] mb-20 bg-black/10">
-                <div className="absolute inset-0 -z-10">
+            <section ref={valuesRef} className="py-40 px-6 max-w-7xl mx-auto text-center relative overflow-hidden rounded-[4rem] mb-20 bg-charcoal">
+                <div className="absolute inset-0 z-0">
                     <img
                         src="/values-nature-new.jpg"
                         alt="Core DNA"
-                        className="w-full h-full object-cover opacity-90 brightness-[0.8] blur-[4px] scale-105"
+                        className="w-full h-full object-cover scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60"></div>
+                    <div className="absolute inset-0 bg-black/40"></div>
                 </div>
 
+                <div className="relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                        viewport={{ once: true }}
+                        className="mb-32"
+                    >
+                        <h2 className="font-serif text-[clamp(4rem,10vw,8rem)] tracking-tight text-white leading-none drop-shadow-2xl">Core Values</h2>
+                    </motion.div>
+
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+                        {values.map((val, idx) => (
+                            <motion.div
+                                key={idx}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8, delay: val.delay }}
+                                whileHover={{
+                                    scale: 1.02,
+                                    backgroundColor: "rgba(255,255,255,0.08)",
+                                    borderColor: "rgba(255,255,255,0.2)"
+                                }}
+                                className="relative aspect-[1.1/1] rounded-[3rem] bg-white/[0.04] border border-white/10 backdrop-blur-2xl flex flex-col items-center justify-center group transition-all duration-500 shadow-2xl"
+                            >
+                                <span className="material-symbols-outlined text-3xl text-white mb-8 font-light group-hover:rotate-[360deg] transition-transform duration-1000 ease-in-out">
+                                    {val.icon}
+                                </span>
+                                <span className="text-[11px] tracking-[0.4em] uppercase font-bold text-white/50 group-hover:text-white transition-colors duration-500">
+                                    {val.name}
+                                </span>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    {/* Sustainability / CSR Section */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.2, delay: 0.2 }}
+                        viewport={{ once: true }}
+                        className="mt-32 max-w-6xl mx-auto overflow-hidden rounded-[4rem] relative group border border-white/10 shadow-3xl"
+                    >
+                        <div className="aspect-[21/9] w-full relative overflow-hidden">
+                            <img
+                                src="/corporate-social.jpg"
+                                alt="Sustainable Future"
+                                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                            <div className="absolute bottom-12 left-12 right-12 text-left">
+                                <span className="text-accent-gold text-xs tracking-[0.6em] uppercase mb-4 block font-bold">Sustainability</span>
+                                <h3 className="font-serif text-4xl md:text-5xl text-white mb-4 tracking-tight">Rooted in the <span className="italic font-light text-accent-gold">Future</span></h3>
+                                <p className="text-white/60 max-w-xl text-lg font-light leading-relaxed">
+                                    We believe that industrial growth and environmental stewardship go hand in hand. Our commitment to reforestation and community involvement is a cornerstone of our corporate DNA.
+                                </p>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+
+                {/* Sustainability / CSR Section */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                    initial={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mb-32"
+                    className="mt-20 max-w-6xl mx-auto overflow-hidden rounded-[4rem] relative group border border-white/20 shadow-4xl"
                 >
-                    <h2 className="font-serif text-[clamp(3.5rem,10vw,8rem)] tracking-tight text-white leading-none">Core Values</h2>
+                    <div className="aspect-[16/9] md:aspect-[21/9] w-full relative overflow-hidden">
+                        <img
+                            src="/corporate-social.jpg"
+                            alt="Sustainable Future"
+                            className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                        <div className="absolute bottom-12 left-12 right-12 text-left">
+                            <span className="text-accent-gold text-xs tracking-[0.6em] uppercase mb-4 block font-bold">Sustainability</span>
+                            <h3 className="font-serif text-4xl md:text-5xl text-white mb-4 tracking-tight drop-shadow-xl">Rooted in the <span className="italic font-light text-accent-gold">Future</span></h3>
+                            <p className="text-white/80 max-w-xl text-lg font-light leading-relaxed drop-shadow-lg">
+                                We believe that industrial growth and environmental stewardship go hand in hand. Our commitment to reforestation and community involvement is a cornerstone of our corporate DNA.
+                            </p>
+                        </div>
+                    </div>
                 </motion.div>
-
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 px-4">
-                    {values.map((val, idx) => (
-                        <motion.div
-                            key={idx}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: val.delay }}
-                            whileHover={{
-                                scale: 1.02,
-                                backgroundColor: "rgba(255,255,255,0.08)",
-                                borderColor: "rgba(255,255,255,0.2)"
-                            }}
-                            className="relative aspect-[1.1/1] rounded-[3rem] bg-white/[0.04] border border-white/10 backdrop-blur-2xl flex flex-col items-center justify-center group transition-all duration-500 shadow-2xl"
-                        >
-                            <span className="material-symbols-outlined text-3xl text-white mb-8 font-light group-hover:rotate-[360deg] transition-transform duration-1000 ease-in-out">
-                                {val.icon}
-                            </span>
-                            <span className="text-[11px] tracking-[0.4em] uppercase font-bold text-white/50 group-hover:text-white transition-colors duration-500">
-                                {val.name}
-                            </span>
-                        </motion.div>
-                    ))}
-                </div>
             </section>
         </div>
     );
