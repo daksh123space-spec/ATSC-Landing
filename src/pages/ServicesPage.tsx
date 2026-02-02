@@ -114,20 +114,6 @@ const ServicesPage: React.FC = () => {
                 { label: "Rotary Printing", value: "3 Units" },
                 { label: "Jet Dyeing", value: "14 Units" }
             ]
-        },
-        {
-            title: "Garment & Apparel",
-            content: [
-                "Our company has a vertical business model spanning from spinning, weaving, dyeing, and printing all the way to garment manufacturing.",
-                "We have expanded into apparel manufacturing since 2022 and have already become a leading supplier for the National Forces’ uniform requirements, supplying across all required product categories.",
-                "Through partnerships with leading multinational manufacturers, we are expanding our garment operations into international markets, ensuring global standards in every stitch."
-            ],
-            stats: [
-                { label: "Status", value: "Leading Supplier" },
-                { label: "National Forces", value: "Primary Partner" },
-                { label: "Multinational", value: "Partnerships" },
-                { label: "Garment Vertical", value: "Full Stack" }
-            ]
         }
     ];
 
@@ -140,10 +126,14 @@ const ServicesPage: React.FC = () => {
             />
 
             {/* Clean Hero Section */}
-            <section className="relative h-[60vh] flex items-center justify-center overflow-hidden border-b border-white/5">
+            <section className="relative h-[70vh] flex items-center justify-center overflow-hidden border-b border-white/5">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-charcoal"></div>
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-accent-gold/5 via-transparent to-transparent opacity-50"></div>
+                    <img
+                        src="/service-hero-bg.png"
+                        alt="ATSC Infrastructure"
+                        className="w-full h-full object-cover opacity-40 brightness-[0.7] scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-transparent to-charcoal"></div>
                 </div>
 
                 <div className="relative z-10 text-center px-6">
@@ -152,13 +142,13 @@ const ServicesPage: React.FC = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
                     >
-                        <span className="text-accent-gold text-[10px] tracking-[1em] uppercase mb-8 block font-black opacity-60">Corporate Capabilities</span>
-                        <h1 className="font-serif text-[clamp(4rem,10vw,8rem)] leading-none tracking-tighter mb-10">
+                        <span className="text-accent-gold text-[10px] tracking-[1em] uppercase mb-8 block font-black opacity-80">Corporate Capabilities</span>
+                        <h1 className="font-serif text-[clamp(4rem,10vw,8rem)] leading-none tracking-tighter mb-10 drop-shadow-2xl">
                             The Vertical <br />
-                            <span className="italic font-light text-white/30">Advantage</span>
+                            <span className="italic font-light text-white/40">Advantage</span>
                         </h1>
                         <div className="w-24 h-[1px] bg-accent-gold/40 mx-auto mb-10"></div>
-                        <p className="max-w-2xl mx-auto text-xl text-white/50 font-light leading-relaxed">
+                        <p className="max-w-2xl mx-auto text-xl text-white font-light leading-relaxed drop-shadow-lg">
                             A comprehensive overview of Arbaminch Textile SC's industrial infrastructure, production capacities, and service spectrum.
                         </p>
                     </motion.div>
