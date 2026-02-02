@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --color-charcoal: #0a0a0a;
+  --color-off-white: #f2f0e9;
+  --color-accent: #d4af37;
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+}
+
+@layer utilities {
+  .glass-nav {
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .text-shadow {
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .hero-zoom {
+    animation: slowZoom 20s infinite alternate;
+  }
+}
+
+@keyframes slowZoom {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+body {
+  @apply bg-charcoal text-off-white font-sans overflow-x-hidden selection:bg-white selection:text-charcoal;
+}
