@@ -154,12 +154,12 @@ const ServicesPage: React.FC = () => {
                             transition={{ duration: 2, delay: 0.5 }}
                             className="text-accent-gold text-[11px] uppercase mb-10 block font-black"
                         >
-                            Industrial Excellence
+                            A Heritage of Excellence
                         </motion.span>
 
                         <h1 className="font-serif text-[clamp(4.5rem,14vw,11rem)] leading-[0.85] tracking-tighter mb-12 drop-shadow-2xl">
-                            Corporate <br />
-                            <span className="italic font-light text-white/40">Capabilities</span>
+                            The Pinnacle of <br />
+                            <span className="italic font-light text-white/40">Textile Mastery</span>
                         </h1>
 
                         <div className="flex items-center justify-center gap-6 mb-12">
@@ -168,9 +168,9 @@ const ServicesPage: React.FC = () => {
                             <div className="w-16 h-[1px] bg-accent-gold/30"></div>
                         </div>
 
-                        <p className="max-w-3xl mx-auto text-xl md:text-2xl text-white font-light leading-relaxed drop-shadow-xl opacity-90">
-                            A high-fidelity perspective on our vertical infrastructure, <br className="hidden md:block" />
-                            precision production capacities, and technical service spectrum.
+                        <p className="max-w-4xl mx-auto text-xl md:text-2xl text-white font-light leading-relaxed drop-shadow-xl opacity-90">
+                            Experience the epitome of textile innovation with our cutting-edge services <br className="hidden md:block" />
+                            that redefine quality and craftsmanship.
                         </p>
                     </motion.div>
                 </div>
