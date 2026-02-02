@@ -1,13 +1,13 @@
 import React from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 
-const ServiceSection = ({ title, content, stats, images, index }: any) => {
+const ServiceSection = ({ title, content, stats, images, index, detailSections }: any) => {
     const isEven = index % 2 === 0;
 
     return (
         <section className={`py-40 px-6 border-b border-white/5 ${index % 2 === 1 ? 'bg-white/[0.01]' : ''}`}>
             <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
 
                     {/* Text Content */}
                     <div className={`space-y-12 ${!isEven ? 'lg:order-2' : ''}`}>
@@ -19,7 +19,7 @@ const ServiceSection = ({ title, content, stats, images, index }: any) => {
                         >
                             <span className="text-accent-gold text-xs tracking-[0.5em] uppercase font-bold mb-8 block">Section 0{index + 1}</span>
                             <h2 className="font-serif text-6xl md:text-8xl text-white mb-10 tracking-tighter leading-none">{title}</h2>
-                            <div className="space-y-6">
+                            <div className="space-y-8">
                                 {content.map((p: string, i: number) => (
                                     <p key={i} className="text-xl text-white/60 font-light leading-relaxed">
                                         {p}
@@ -27,6 +27,25 @@ const ServiceSection = ({ title, content, stats, images, index }: any) => {
                                 ))}
                             </div>
                         </motion.div>
+
+                        {detailSections && (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10">
+                                {detailSections.map((detail: any, i: number) => (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: i * 0.1 }}
+                                        className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/5"
+                                    >
+                                        <h4 className="text-accent-gold text-lg font-serif mb-3">{detail.name}</h4>
+                                        <p className="text-white/40 text-sm leading-relaxed font-light">{detail.description}</p>
+                                        <div className="mt-4 text-[10px] text-accent-gold/50 uppercase tracking-widest font-black">Composition: {detail.composition}</div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        )}
 
                         {/* Interactive Highlight */}
                         <motion.div
@@ -43,26 +62,26 @@ const ServiceSection = ({ title, content, stats, images, index }: any) => {
                     </div>
 
                     {/* Visuals & Stats */}
-                    <div className={`space-y-12 ${!isEven ? 'lg:order-1' : ''}`}>
+                    <div className={`space-y-12 lg:sticky lg:top-40 ${!isEven ? 'lg:order-1' : ''}`}>
                         {/* Image Grid */}
                         {images && images.length > 0 && (
-                            <div className="grid grid-cols-12 gap-4 h-[500px]">
+                            <div className={`grid ${images.length > 2 ? 'grid-cols-2' : 'grid-cols-12'} gap-4 h-auto`}>
                                 {images.length === 1 ? (
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         whileInView={{ opacity: 1, scale: 1 }}
                                         viewport={{ once: true }}
-                                        className="col-span-12 h-full rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl"
+                                        className="col-span-12 h-[500px] rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl"
                                     >
                                         <img src={images[0]} className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105" alt={title} />
                                     </motion.div>
-                                ) : (
+                                ) : images.length === 2 ? (
                                     <>
                                         <motion.div
                                             initial={{ opacity: 0, x: -20 }}
                                             whileInView={{ opacity: 1, x: 0 }}
                                             viewport={{ once: true }}
-                                            className="col-span-7 h-full rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl"
+                                            className="col-span-7 h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl"
                                         >
                                             <img src={images[0]} className="w-full h-full object-cover" alt={title} />
                                         </motion.div>
@@ -70,11 +89,24 @@ const ServiceSection = ({ title, content, stats, images, index }: any) => {
                                             initial={{ opacity: 0, x: 20, y: 40 }}
                                             whileInView={{ opacity: 1, x: 0, y: 40 }}
                                             viewport={{ once: true }}
-                                            className="col-span-5 h-[80%] rounded-[2rem] overflow-hidden border border-white/10 shadow-3xl translate-y-20"
+                                            className="col-span-5 h-[300px] rounded-[2rem] overflow-hidden border border-white/10 shadow-3xl translate-y-10"
                                         >
                                             <img src={images[1]} className="w-full h-full object-cover" alt={title} />
                                         </motion.div>
                                     </>
+                                ) : (
+                                    images.map((img: string, i: number) => (
+                                        <motion.div
+                                            key={i}
+                                            initial={{ opacity: 0, scale: 0.9 }}
+                                            whileInView={{ opacity: 1, scale: 1 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: i * 0.1 }}
+                                            className="h-[250px] rounded-[2rem] overflow-hidden border border-white/10 shadow-xl"
+                                        >
+                                            <img src={img} className="w-full h-full object-cover" alt={`${title} ${i}`} />
+                                        </motion.div>
+                                    ))
                                 )}
                             </div>
                         )}
@@ -142,10 +174,39 @@ const ServicesPage: React.FC = () => {
         },
         {
             title: "Dyeing & Printing",
+            images: [
+                "/dyeing-printing-1.png",
+                "/dyeing-printing-2.png",
+                "/dyeing-printing-3.png",
+                "/dyeing-printing-military.png",
+                "/dyeing-printing-fabric.png"
+            ],
             content: [
-                "Our state-of-the-art dyeing & printing plant in Sebeta Town was built at a cost of 1.34 billion ETB, featuring the latest in textile finishing infrastructure and utilities.",
-                "The facility is capable of producing high-quality printed and dyed fabrics with a maximum daily capacity of 200,000 meters, depending on the specific fabric quality and requirements.",
-                "Our rotary printing and jet dyeing machines ensure that every meter of fabric meets international standards for color fastness and finish quality."
+                "Our state-of-the-art dyeing & printing plant in Sebeta Town represents a landmark 1.34 billion ETB investment in Ethiopian textile finishing. This facility is engineered for high-end finished products covering a vast spectrum of fabric constructions.",
+                "Equipped with 3 rotary printing units and 14 jet dyeing machines, the factory operates with a maximum daily capacity of 200,000 meters. We serve local, European, and neighboring African markets with uncompromising quality standards.",
+                "Our technology allows for precision finishing on polyester, pure cotton, and complex multi-fiber blends, meeting the rigorous demands of fashion, industrial, and defense sectors."
+            ],
+            detailSections: [
+                {
+                    name: "Chiffon",
+                    description: "A sheer, semi-transparent fabric with a simple weave, known for being extremely light and elegant.",
+                    composition: "Silk, Cotton, Nylon, Polyester"
+                },
+                {
+                    name: "Wool Peach",
+                    description: "A mixture fabric that is lighter and thinner than jersey, providing a smooth, high-quality finish.",
+                    composition: "Silk, Cotton, Nylon"
+                },
+                {
+                    name: "Twill & Knit Prints",
+                    description: "Combining synthetic strength with cotton softness. Creases less and requires minimal ironing.",
+                    composition: "Polyester, Cotton"
+                },
+                {
+                    name: "Suiting Fabric",
+                    description: "High-quality woven material used for tailored clothing and professional military uniforms.",
+                    composition: "Polyester, Viscose"
+                }
             ],
             stats: [
                 { label: "Max Daily Capacity", value: "200k Mtrs" },
