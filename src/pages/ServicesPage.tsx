@@ -7,10 +7,9 @@ const ServiceSection = ({ title, content, stats, images, index, detailSections }
     return (
         <section className={`py-40 px-6 border-b border-white/5 ${index % 2 === 1 ? 'bg-white/[0.01]' : ''}`}>
             <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-
-                    {/* Text Content */}
-                    <div className={`space-y-12 ${!isEven ? 'lg:order-2' : ''}`}>
+                {/* Main Heading & Intro */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start mb-24">
+                    <div className="space-y-12">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -27,91 +26,10 @@ const ServiceSection = ({ title, content, stats, images, index, detailSections }
                                 ))}
                             </div>
                         </motion.div>
-
-                        {detailSections && (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10">
-                                {detailSections.map((detail: any, i: number) => (
-                                    <motion.div
-                                        key={i}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: i * 0.1 }}
-                                        className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/5"
-                                    >
-                                        <h4 className="text-accent-gold text-lg font-serif mb-3">{detail.name}</h4>
-                                        <p className="text-white/40 text-sm leading-relaxed font-light">{detail.description}</p>
-                                        <div className="mt-4 text-[10px] text-accent-gold/50 uppercase tracking-widest font-black">Composition: {detail.composition}</div>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        )}
-
-                        {/* Interactive Highlight */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1, delay: 0.4 }}
-                            className="p-8 rounded-[2.5rem] bg-gradient-to-br from-accent-gold/10 to-transparent border border-accent-gold/20"
-                        >
-                            <p className="text-accent-gold text-sm font-medium italic opacity-80">
-                                Driving industrial excellence through vertical integration and advanced technology.
-                            </p>
-                        </motion.div>
                     </div>
 
-                    {/* Visuals & Stats */}
-                    <div className={`space-y-12 lg:sticky lg:top-40 ${!isEven ? 'lg:order-1' : ''}`}>
-                        {/* Image Grid */}
-                        {images && images.length > 0 && (
-                            <div className={`grid ${images.length > 2 ? 'grid-cols-2' : 'grid-cols-12'} gap-4 h-auto`}>
-                                {images.length === 1 ? (
-                                    <motion.div
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        viewport={{ once: true }}
-                                        className="col-span-12 h-[500px] rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl"
-                                    >
-                                        <img src={images[0]} className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105" alt={title} />
-                                    </motion.div>
-                                ) : images.length === 2 ? (
-                                    <>
-                                        <motion.div
-                                            initial={{ opacity: 0, x: -20 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            viewport={{ once: true }}
-                                            className="col-span-7 h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl"
-                                        >
-                                            <img src={images[0]} className="w-full h-full object-cover" alt={title} />
-                                        </motion.div>
-                                        <motion.div
-                                            initial={{ opacity: 0, x: 20, y: 40 }}
-                                            whileInView={{ opacity: 1, x: 0, y: 40 }}
-                                            viewport={{ once: true }}
-                                            className="col-span-5 h-[300px] rounded-[2rem] overflow-hidden border border-white/10 shadow-3xl translate-y-10"
-                                        >
-                                            <img src={images[1]} className="w-full h-full object-cover" alt={title} />
-                                        </motion.div>
-                                    </>
-                                ) : (
-                                    images.map((img: string, i: number) => (
-                                        <motion.div
-                                            key={i}
-                                            initial={{ opacity: 0, scale: 0.9 }}
-                                            whileInView={{ opacity: 1, scale: 1 }}
-                                            viewport={{ once: true }}
-                                            transition={{ delay: i * 0.1 }}
-                                            className="h-[250px] rounded-[2rem] overflow-hidden border border-white/10 shadow-xl"
-                                        >
-                                            <img src={img} className="w-full h-full object-cover" alt={`${title} ${i}`} />
-                                        </motion.div>
-                                    ))
-                                )}
-                            </div>
-                        )}
-
-                        <div className="grid grid-cols-2 gap-6 pt-12">
+                    <div className="lg:sticky lg:top-40">
+                        <div className="grid grid-cols-2 gap-6">
                             {stats.map((stat: any, i: number) => (
                                 <motion.div
                                     key={i}
@@ -119,15 +37,88 @@ const ServiceSection = ({ title, content, stats, images, index, detailSections }
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.8, delay: i * 0.1 }}
-                                    className="p-8 rounded-[2rem] bg-white/[0.03] border border-white/10 backdrop-blur-xl group hover:bg-white/[0.06] transition-all duration-500 shadow-xl"
+                                    className="p-8 rounded-[2rem] bg-white/[0.03] border border-white/10 backdrop-blur-xl shadow-xl"
                                 >
-                                    <div className="text-accent-gold text-3xl font-bold mb-2 tracking-tighter drop-shadow-sm">{stat.value}</div>
+                                    <div className="text-accent-gold text-3xl font-bold mb-2 tracking-tighter">{stat.value}</div>
                                     <div className="text-white/40 text-[10px] tracking-[0.2em] uppercase font-black">{stat.label}</div>
                                 </motion.div>
                             ))}
                         </div>
                     </div>
                 </div>
+
+                {/* Categorized Details & Images - Restored and Improved */}
+                {detailSections ? (
+                    <div className="space-y-32">
+                        {detailSections.map((detail: any, i: number) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 40 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1 }}
+                                className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center p-12 rounded-[4rem] bg-white/[0.02] border border-white/5"
+                            >
+                                <div className={`space-y-8 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+                                    <div>
+                                        <h3 className="text-4xl md:text-5xl font-serif text-white mb-6 uppercase tracking-tight">{detail.name}</h3>
+                                        <div className="w-12 h-1 bg-accent-gold mb-8"></div>
+                                        <p className="text-lg text-white/60 font-light leading-relaxed mb-6">
+                                            {detail.description}
+                                        </p>
+                                        <div className="inline-block px-4 py-2 bg-accent-gold/10 border border-accent-gold/20 rounded-lg">
+                                            <span className="text-[10px] text-accent-gold uppercase font-black tracking-widest">Composition: {detail.composition}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className={`relative h-[450px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+                                    <img
+                                        src={detail.image}
+                                        alt={detail.name}
+                                        className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                ) : (
+                    /* Fallback for Spinning & Weaving with image grids */
+                    images && images.length > 0 && (
+                        <div className="grid grid-cols-12 gap-8 h-auto">
+                            {images.length === 1 ? (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    viewport={{ once: true }}
+                                    className="col-span-12 h-[500px] rounded-[4rem] overflow-hidden border border-white/10 shadow-3xl"
+                                >
+                                    <img src={images[0]} className="w-full h-full object-cover" alt={title} />
+                                </motion.div>
+                            ) : (
+                                <>
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -30 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        className="col-span-12 lg:col-span-7 h-[500px] rounded-[4rem] overflow-hidden border border-white/10 shadow-3xl"
+                                    >
+                                        <img src={images[0]} className="w-full h-full object-cover" alt={title} />
+                                    </motion.div>
+                                    <motion.div
+                                        initial={{ opacity: 0, x: 30, y: 50 }}
+                                        whileInView={{ opacity: 1, x: 0, y: 50 }}
+                                        viewport={{ once: true }}
+                                        className="col-span-12 lg:col-span-5 h-[400px] rounded-[4rem] overflow-hidden border border-white/10 shadow-3xl lg:translate-y-20"
+                                    >
+                                        <img src={images[1]} className="w-full h-full object-cover" alt={title} />
+                                    </motion.div>
+                                </>
+                            )}
+                        </div>
+                    )
+                )}
             </div>
         </section>
     );
@@ -174,13 +165,6 @@ const ServicesPage: React.FC = () => {
         },
         {
             title: "Dyeing & Printing",
-            images: [
-                "/dyeing-printing-1.png",
-                "/dyeing-printing-2.png",
-                "/dyeing-printing-3.png",
-                "/dyeing-printing-military.png",
-                "/dyeing-printing-fabric.png"
-            ],
             content: [
                 "Our state-of-the-art dyeing & printing plant in Sebeta Town represents a landmark 1.34 billion ETB investment in Ethiopian textile finishing. This facility is engineered for high-end finished products covering a vast spectrum of fabric constructions.",
                 "Equipped with 3 rotary printing units and 14 jet dyeing machines, the factory operates with a maximum daily capacity of 200,000 meters. We serve local, European, and neighboring African markets with uncompromising quality standards.",
@@ -189,22 +173,26 @@ const ServicesPage: React.FC = () => {
             detailSections: [
                 {
                     name: "Chiffon",
-                    description: "A sheer, semi-transparent fabric with a simple weave, known for being extremely light and elegant.",
+                    image: "/dyeing-printing-1.png",
+                    description: "A sheer, semi-transparent fabric with a simple weave, known for being extremely light and elegant. Composition: Silk, Cotton, Nylon, Polyester.",
                     composition: "Silk, Cotton, Nylon, Polyester"
                 },
                 {
                     name: "Wool Peach",
-                    description: "A mixture fabric that is lighter and thinner than jersey, providing a smooth, high-quality finish.",
+                    image: "/dyeing-printing-3.png",
+                    description: "A mixture fabric that is lighter and thinner than jersey, providing a smooth, high-quality finish for fashion garments.",
                     composition: "Silk, Cotton, Nylon"
                 },
                 {
                     name: "Twill & Knit Prints",
-                    description: "Combining synthetic strength with cotton softness. Creases less and requires minimal ironing.",
+                    image: "/dyeing-printing-military.png",
+                    description: "Combining synthetic strength with cotton softness. Widely used for high-durability requirements like tactical and military gear.",
                     composition: "Polyester, Cotton"
                 },
                 {
                     name: "Suiting Fabric",
-                    description: "High-quality woven material used for tailored clothing and professional military uniforms.",
+                    image: "/dyeing-printing-fabric.png",
+                    description: "High-quality woven material used for tailored clothing and premium corporate apparel.",
                     composition: "Polyester, Viscose"
                 }
             ],
@@ -237,9 +225,7 @@ const ServicesPage: React.FC = () => {
                     >
                         <source src="/services-hero-video.mp4" type="video/mp4" />
                     </video>
-                    {/* Multi-layered overlays for depth */}
                     <div className="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-transparent to-charcoal"></div>
-                    <div className="absolute inset-0 bg-charcoal/20"></div>
                 </div>
 
                 <div className="relative z-10 text-center px-6 mt-20">
@@ -256,35 +242,16 @@ const ServicesPage: React.FC = () => {
                         >
                             A Heritage of Excellence
                         </motion.span>
-
                         <h1 className="font-serif text-[clamp(4.5rem,14vw,11rem)] leading-[0.85] tracking-tighter mb-12 drop-shadow-2xl">
                             The Pinnacle of <br />
                             <span className="italic font-light text-white/40">Textile Mastery</span>
                         </h1>
-
-                        <div className="flex items-center justify-center gap-6 mb-12">
-                            <div className="w-16 h-[1px] bg-accent-gold/30"></div>
-                            <div className="w-2 h-2 rounded-full bg-accent-gold/40"></div>
-                            <div className="w-16 h-[1px] bg-accent-gold/30"></div>
-                        </div>
-
                         <p className="max-w-4xl mx-auto text-xl md:text-2xl text-white font-light leading-relaxed drop-shadow-xl opacity-90">
                             Experience the epitome of textile innovation with our cutting-edge services <br className="hidden md:block" />
                             that redefine quality and craftsmanship.
                         </p>
                     </motion.div>
                 </div>
-
-                {/* Decorative Scroll Hint */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 2, duration: 1 }}
-                    className="absolute bottom-12 left-12 flex items-center gap-4"
-                >
-                    <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/30 rotate-180 [writing-mode:vertical-lr]">Scroll</div>
-                    <div className="w-px h-24 bg-gradient-to-b from-accent-gold/50 to-transparent"></div>
-                </motion.div>
             </section>
 
             {/* Main Content */}
@@ -296,8 +263,6 @@ const ServicesPage: React.FC = () => {
 
             {/* Professional Footer CTA */}
             <section className="py-60 px-6 bg-black text-center relative overflow-hidden">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent-gold/5 blur-[150px] rounded-full"></div>
-
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
@@ -310,18 +275,7 @@ const ServicesPage: React.FC = () => {
                         Leverage Ethiopia's leading textile infrastructure for your next project. Our vertical model ensures quality, speed, and reliability.
                     </p>
                     <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-                        <a
-                            href="/contact"
-                            className="px-16 py-7 bg-white text-charcoal rounded-full font-bold uppercase tracking-[0.2em] hover:bg-accent-gold hover:text-white transition-all duration-500 shadow-2xl"
-                        >
-                            Request Consultation
-                        </a>
-                        <a
-                            href="/about"
-                            className="px-12 py-7 border border-white/20 rounded-full font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all duration-500 text-xs"
-                        >
-                            Our Story
-                        </a>
+                        <a href="/contact" className="px-16 py-7 bg-white text-charcoal rounded-full font-bold uppercase tracking-[0.2em] hover:bg-accent-gold hover:text-white transition-all duration-500 shadow-2xl">Request Consultation</a>
                     </div>
                 </motion.div>
             </section>
