@@ -3,17 +3,44 @@ import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube, Send } from 'lucide-react';
 
 const Contact: React.FC = () => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [formState, setFormState] = useState({
         name: '',
         email: '',
         message: ''
     });
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle form submission logic
-        console.log('Form submitted:', formState);
-        alert('Thank you for your message. We will get back to you shortly.');
+        setIsSubmitting(true);
+
+        try {
+            // Using Formspree as a reliable serverless backend for email delivery
+            const response = await fetch("https://formspree.io/f/xvgzloww", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    ...formState,
+                    _subject: `New Contact Form Submission from ${formState.name}`,
+                    _to: "headquarters@arbaminchtextile.com"
+                })
+            });
+
+            if (response.ok) {
+                alert('Success! Your message has been sent to headquarters@arbaminchtextile.com. We will get back to you shortly.');
+                setFormState({ name: '', email: '', message: '' });
+            } else {
+                // Fallback for issues
+                window.location.href = `mailto:headquarters@arbaminchtextile.com?subject=Contact Form Inquiry&body=${formState.message}`;
+            }
+        } catch (error) {
+            // Connection error fallback
+            window.location.href = `mailto:headquarters@arbaminchtextile.com?subject=Contact Form Inquiry&body=${formState.message}`;
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -168,10 +195,20 @@ const Contact: React.FC = () => {
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     type="submit"
-                                    className="w-full py-6 bg-[#e91e63] text-white rounded-2xl font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-3 shadow-xl hover:bg-[#d81b60] transition-all duration-300"
+                                    disabled={isSubmitting}
+                                    className={`w-full py-6 text-white rounded-2xl font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-3 shadow-xl transition-all duration-300 ${isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#e91e63] hover:bg-[#d81b60]'}`}
                                 >
-                                    <Send size={18} />
-                                    Send Message
+                                    {isSubmitting ? (
+                                        <>
+                                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                                            Sending...
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Send size={18} />
+                                            Send Message
+                                        </>
+                                    )}
                                 </motion.button>
                             </form>
 
